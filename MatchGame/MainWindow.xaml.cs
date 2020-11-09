@@ -60,5 +60,33 @@ namespace MatchGame
         {
 
         }
+
+        TextBlock lastTextClicked;
+
+        bool findingmach = false;
+
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            TextBlock textBlock = sender as TextBlock;
+
+            if (findingmach == false)
+            {
+                textBlock.Visibility = Visibility.Hidden;
+                lastTextClicked = textBlock;
+                findingmach = true;
+            }
+            else if (textBlock.Text == lastTextClicked.Text /*&& !findingmach*/)
+            {
+                textBlock.Visibility = Visibility.Hidden;
+                findingmach = false;
+            }
+            else
+            {
+                lastTextClicked.Visibility = Visibility.Visible;
+                findingmach = false;
+            }
+        }
     }
 }
